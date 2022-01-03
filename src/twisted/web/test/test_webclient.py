@@ -445,11 +445,11 @@ class WebClientTests(unittest.TestCase):
         d = self.assertFailure(d, client.PartialDownloadError)
 
         def cbFailed(ignored):
-            self.assertEquals(1, len(logObserver))
+            self.assertEqual(1, len(logObserver))
             event = logObserver[0]
             f = event["log_failure"]
             self.assertIsInstance(f.value, IOError)
-            self.assertEquals(f.value.args, exc.args)
+            self.assertEqual(f.value.args, exc.args)
             self.assertEqual(len(self.flushLoggedErrors(IOError)), 1)
 
         d.addCallback(cbFailed)

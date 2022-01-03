@@ -337,7 +337,7 @@ class HTTP1_0Tests(unittest.TestCase, ResponseTestMixin):
         clock.advance(60)
         self.assertTrue(transport.disconnecting)
         self.assertFalse(transport.disconnected)
-        self.assertEquals(1, len(logObserver))
+        self.assertEqual(1, len(logObserver))
         event = logObserver[0]
         self.assertIn("Timing out client: {peer}", event["log_format"])
 
@@ -348,9 +348,9 @@ class HTTP1_0Tests(unittest.TestCase, ResponseTestMixin):
         clock.advance(1)
         self.assertTrue(transport.disconnecting)
         self.assertTrue(transport.disconnected)
-        self.assertEquals(2, len(logObserver))
+        self.assertEqual(2, len(logObserver))
         event = logObserver[1]
-        self.assertEquals("Forcibly timing out client: {peer}", event["log_format"])
+        self.assertEqual("Forcibly timing out client: {peer}", event["log_format"])
 
     def test_transportNotAbortedAfterConnectionLost(self):
         """
@@ -647,7 +647,7 @@ class PipeliningBodyTests(unittest.TestCase, ResponseTestMixin):
                 ),
             )
         a.dataReceived(self.requests)
-        self.assertEquals(b.producerState, "paused")
+        self.assertEqual(b.producerState, "paused")
 
 
 class ShutdownTests(unittest.TestCase):
@@ -2293,7 +2293,7 @@ Hello,
         self.runRequest(f, Request, 0)
         req = requests.pop()
         self.assertEqual((b"", b""), req.credentials)
-        self.assertEquals(1, len(logObserver))
+        self.assertEqual(1, len(logObserver))
         event = logObserver[0]
         f = event["log_failure"]
         self.assertIsInstance(f.value, AttributeError)
@@ -3103,9 +3103,9 @@ class RequestTests(unittest.TestCase, ResponseTestMixin):
                 )
             ],
         )
-        self.assertEquals(1, len(logObserver))
+        self.assertEqual(1, len(logObserver))
         event = logObserver[0]
-        self.assertEquals(
+        self.assertEqual(
             "Warning: last-modified specified both in"
             " header list and lastModified attribute.",
             event["log_format"],
@@ -3550,7 +3550,7 @@ class RequestTests(unittest.TestCase, ResponseTestMixin):
         request = http.Request(DummyChannel(), False)
         request.registerProducer(DummyProducer(), True)
         request.finish()
-        self.assertEquals(1, len(logObserver))
+        self.assertEqual(1, len(logObserver))
         event = logObserver[0]
         f = event["log_failure"]
         self.assertIsInstance(f.value, RuntimeError)

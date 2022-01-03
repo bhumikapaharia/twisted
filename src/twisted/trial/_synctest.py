@@ -1218,7 +1218,7 @@ class SynchronousTestCase(_Assertions):
         }
         if message is not None:
             expectedWarning = expectedWarning + ": " + message
-        self.assert_(
+        self.assertTrue(
             observedWarning.startswith(expectedWarning),
             f"Expected {observedWarning!r} to start with {expectedWarning!r}",
         )

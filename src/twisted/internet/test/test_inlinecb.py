@@ -349,7 +349,7 @@ class CancellationTests(SynchronousTestCase):
         results = []
         d.addCallback(results.append)
         d.cancel()
-        self.assertEquals(results, [4320])
+        self.assertEqual(results, [4320])
 
     def test_asynchronousCancellation(self):
         """

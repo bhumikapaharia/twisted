@@ -675,7 +675,7 @@ class HTTPConnectionPoolTests(TestCase, FakeReactorAndConnectMixin):
 
         protocol.state = "NOTQUIESCENT"
         self.pool._putConnection(("http", b"example.com", 80), protocol)
-        self.assertEquals(1, len(logObserver))
+        self.assertEqual(1, len(logObserver))
 
         event = logObserver[0]
         f = event["log_failure"]
@@ -894,9 +894,7 @@ class IntegrationTestingMixin:
         )
         pump.flush()
         response = self.successResultOf(deferred)
-        self.assertEquals(
-            response.headers.getRawHeaders(b"x-an-header")[0], b"an-value"
-        )
+        self.assertEqual(response.headers.getRawHeaders(b"x-an-header")[0], b"an-value")
 
 
 @implementer(IAgentEndpointFactory)
@@ -3130,7 +3128,7 @@ class HostnameCachingHTTPSPolicyTests(TestCase):
         creator = policy.creatorForNetloc(b"foo", 1589)
         self.assertTrue(trustRoot.called)
         trustRoot.called = False
-        self.assertEquals(1, len(policy._cache))
+        self.assertEqual(1, len(policy._cache))
         connection = creator.clientConnectionForTLS(None)
         self.assertIs(trustRoot.context, connection.get_context())
 
@@ -3153,14 +3151,14 @@ class HostnameCachingHTTPSPolicyTests(TestCase):
         host0 = "host0"
         policy.creatorForNetloc(host0.encode("ascii"), 309)
         self.assertIn(host0, policy._cache)
-        self.assertEquals(20, len(policy._cache))
+        self.assertEqual(20, len(policy._cache))
 
         hostn = "new"
         policy.creatorForNetloc(hostn.encode("ascii"), 309)
 
         host1 = "host1"
         self.assertNotIn(host1, policy._cache)
-        self.assertEquals(20, len(policy._cache))
+        self.assertEqual(20, len(policy._cache))
 
         self.assertIn(hostn, policy._cache)
         self.assertIn(host0, policy._cache)
@@ -3174,7 +3172,7 @@ class HostnameCachingHTTPSPolicyTests(TestCase):
         policy.creatorForNetloc(hostNPlus1.encode("ascii"), 800)
 
         self.assertNotIn("host2", policy._cache)
-        self.assertEquals(20, len(policy._cache))
+        self.assertEqual(20, len(policy._cache))
 
         self.assertIn(hostNPlus1, policy._cache)
         self.assertIn(hostn, policy._cache)
@@ -3195,12 +3193,12 @@ class HostnameCachingHTTPSPolicyTests(TestCase):
 
         first = "host0"
         self.assertIn(first, policy._cache)
-        self.assertEquals(5, len(policy._cache))
+        self.assertEqual(5, len(policy._cache))
 
         hostn = "new"
         policy.creatorForNetloc(hostn.encode("ascii"), 309)
         self.assertNotIn(first, policy._cache)
-        self.assertEquals(5, len(policy._cache))
+        self.assertEqual(5, len(policy._cache))
 
         self.assertIn(hostn, policy._cache)
 

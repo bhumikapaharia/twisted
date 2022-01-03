@@ -418,7 +418,7 @@ class ReactorBaseSignalTests(TestCase):
         """
         reactor = TestSpySignalCapturingReactor()
         reactor.sigInt(signal.SIGINT, None)
-        self.assertEquals(signal.SIGINT, reactor._exitSignal)
+        self.assertEqual(signal.SIGINT, reactor._exitSignal)
 
     def test_captureSIGTERM(self):
         """
@@ -427,7 +427,7 @@ class ReactorBaseSignalTests(TestCase):
         """
         reactor = TestSpySignalCapturingReactor()
         reactor.sigTerm(signal.SIGTERM, None)
-        self.assertEquals(signal.SIGTERM, reactor._exitSignal)
+        self.assertEqual(signal.SIGTERM, reactor._exitSignal)
 
     def test_captureSIGBREAK(self):
         """
@@ -439,4 +439,4 @@ class ReactorBaseSignalTests(TestCase):
 
         reactor = TestSpySignalCapturingReactor()
         reactor.sigBreak(signal.SIGBREAK, None)
-        self.assertEquals(signal.SIGBREAK, reactor._exitSignal)
+        self.assertEqual(signal.SIGBREAK, reactor._exitSignal)
