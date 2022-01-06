@@ -141,5 +141,7 @@ jobs:
               source py38-venv/bin/activate && \
               python -m pip install --upgrade pip tox coverage coveralls incremental && \
               python setup.py install && \
+              apt-get install -y language-pack-en && \
+              export LC_CTYPE=en_US.UTF-8 && \
               tox -e py38-alldeps-withcov-posix && \
               deactivate'
